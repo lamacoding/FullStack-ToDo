@@ -4,37 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lama ToDo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body data-bs-theme="dark">
-    <div
-      class="login-container d-flex align-items-center justify-content-center flex-column"
-    >
-    <h1 class="mb-4">Login</h1>
-      <form class="bg-body-tertiary shadow-lg">
-        <div class="mb-3">
-          <label for="login-email" class="form-label">E-Mail address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="login-email"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" class="form-text">
-            Your E-Mail address will never be shared with anyone.
+  <body data-bs-theme="light">
+    <div class="m-5 row">
+      <h1 class="title">EasyTasks</h1>
+    </div>
+    <div class="col-lg-12">
+      <div
+        class="login-container d-flex align-items-center justify-content-center flex-column"
+      >
+        <h1>
+          Simplify your day,
+          <div id="every" style="display: inline-block">every</div>
+          day!
+        </h1>
+        <p class="lead mb-5 mt-3 text-center">
+          Streamlining your To-Dos, one click at a time.<br />
+          Effortless task management for a productive and stress-free day.
+        </p>
+        <h1 class="my-4">Sign in</h1>
+        <form class="rounded-border">
+          <div class="mb-3">
+            <label for="login-email" class="form-label">E-Mail address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="login-email"
+              aria-describedby="emailHelp"
+              autocomplete="username"
+            />
+            <div id="emailHelp" class="form-text">
+              Your E-Mail address will never be shared with anyone.
+            </div>
           </div>
-        </div>
-        <div class="mb-3">
-          <label for="login-password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="login-password" />
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </form>
+          <div class="mb-5">
+            <label for="login-password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="login-password"
+              autocomplete="current-password"
+            />
+          </div>
+          <button type="submit" class="btn btn-dark">Sign in</button>
+          <a href="#" class="btn btn-outline-dark ms-3">Sign up</a>
+        </form>
+      </div>
     </div>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <script>
+      gsap.to("#every", {
+        duration: 1,
+        rotateZ: 360,
+        repeat: 0,
+        ease: "power2.inOut",
+      });
+    </script>
   </body>
 </html>
