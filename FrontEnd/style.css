@@ -23,7 +23,7 @@ input {
   margin-top: 100px;
   box-shadow: -20px 20px 40px 10px rgba(0, 0, 0, 0.35);
   background-color: transparent;
-  backdrop-filter: blur(80px);
+  backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(80px);
 }
 
@@ -34,4 +34,8 @@ input {
 .title {
     font-weight: bold;
     color: rgba(255,255,255,30%);
+}
+
+.card {
+  width: 22rem;
 }
