@@ -1,9 +1,12 @@
-const loginEmail = document.querySelector("#login-email").value;
-const loginPassword = document.querySelector("#login-password").value;
-const submitButton = document.querySelector("#submit-button");
+"use strict";
+
+const loginEmail = document.getElementById("inputLoginEmail");
+const loginPassword = document.getElementById("inputLoginPassword");
+const submitButton = document.querySelector("#buttonLogin");
 
 submitButton.addEventListener("click", function() {
-  if(loginEmail === "test@test.com" && loginPassword === "test"){
+  console.log(loginEmail.value + " . " + loginPassword.value)
+  if(loginEmail.value === "test@test.com" && loginPassword.value === "test"){
     window.location.href="todo.html";
   }
 

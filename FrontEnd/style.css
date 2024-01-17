@@ -1,41 +1,47 @@
 ::selection {
-  background-color: black;
+  background-color: #0d6efd;
   color: white;
+}
+
+* {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 400;
 }
 
 body {
   overflow-x: hidden;
-  min-height: 90vh;
-  background: rgb(137, 108, 169);
-  background-image: url(assets/login-bg.png);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: white;
 }
 
-input {
-  background-color: transparent !important;
-  border: thin solid rgba(0,0,0,30%) !important;
-  line-height: 30px !important;
+h1, h2 {
+  text-align: center;
+  margin: 20px 20px 10px 20px;
+}
+h1 {
+  font-weight: 700;
+  font-size: 1.5rem;
 }
 
-.card {
-  margin-top: 100px;
-  box-shadow: -20px 20px 40px 10px rgba(0, 0, 0, 0.35);
-  background-color: transparent;
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(80px);
+h2 {
+  font-size: 1.5rem;
 }
 
-.card-header {
-    background-color: rgba(0, 0, 0, 0.08);
+.container-fh {
+  height: 100vh;
 }
 
-.title {
-    font-weight: bold;
-    color: rgba(255,255,255,30%);
+.login-container {
+  padding: 30px 50px 80px 50px;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  width: 450px;
 }
 
-.card {
-  width: 22rem;
+.btn-link {
+  text-decoration: none !important;
+  transform: translateX(-12px);
+}
+
+.form-control-lg {
+  font-size: 1rem;
 }
