@@ -27,7 +27,7 @@ h2 {
 }
 
 .container-fh {
-  height: 100vh;
+  min-height: 90vh;
 }
 
 .login-container {
@@ -35,6 +35,13 @@ h2 {
   border: 1px solid gainsboro;
   border-radius: 10px;
   width: 450px;
+}
+
+@media (max-width: 575px) {
+  .login-container {
+    padding: 0;
+    border: none;
+  }
 }
 
 .btn-link {
