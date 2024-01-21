@@ -1,7 +1,7 @@
 "use strict";
 
-const loginEmail = document.getElementById("inputLoginEmail");
-const loginPassword = document.getElementById("inputLoginPassword");
+const loginEmail = document.querySelector("#inputLoginEmail");
+const loginPassword = document.querySelector("#inputLoginPassword");
 const submitButton = document.querySelector("#buttonLogin");
 
 submitButton.addEventListener("click", function() {
