@@ -15,7 +15,6 @@ const dbConnection = mysql.createConnection({
   password: "",
   database: "todo",
 });
-const query = "SELECT * FROM task WHERE userID = 1";
 
 dbConnection.connect((err) => {
   if (err) {
@@ -38,7 +37,7 @@ const PORT = 3000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("../FrontEnd"));
 
 app.get("/", (req, res) => {
@@ -47,6 +46,7 @@ app.get("/", (req, res) => {
 
 app.get("/todo", (req, res) => {
   res.status(200).sendFile(path.join(__dirname, "../FrontEnd/todo.html"));
+  const query = "SELECT * FROM task WHERE userID = 1";
   dbConnection.query(query, (err, result) => {
     if (err) {
       console.log(err);
@@ -54,6 +54,13 @@ app.get("/todo", (req, res) => {
       console.log(result);
     }
   });
+});
+
+app.post("/login", (req, res) => {
+  console.log(req.body);
+  const query = "SELECT * FROM user WHERE mail=" + req.body.mail;
+  console.log(query);
+  res.status(200).send("OK");
 });
 
 process.on("beforeExit", () => {

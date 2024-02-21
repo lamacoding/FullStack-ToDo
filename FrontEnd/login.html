@@ -23,7 +23,7 @@
       <img src="assets/logo.png" width="20" height="20" alt="Logo" />
       <p class="d-inline m-0">VividWeb</p>
     </div>
-    <hr>
+    <hr />
     <div class="container-fh d-flex align-items-center justify-content-center">
       <div class="login-container mx-5">
         <h1 class="text-primary">
@@ -46,13 +46,14 @@
         </h1>
         <h2>Login</h2>
         <p class="text-center mb-5">Login with VividWeb account.</p>
-        <form class="needs-validation" novalidate>
+        <form action="/login" method="post" class="needs-validation" novalidate>
           <div class="form-floating mb-3">
             <input
               class="form-control form-control-lg"
               type="email"
               id="inputLoginEmail"
               placeholder="test@example.com"
+              name="mail"
             />
             <label for="inputLoginEmail">E-Mail address</label>
           </div>
@@ -63,6 +64,7 @@
               type="password"
               id="inputLoginPassword"
               placeholder="***"
+              name="password"
             />
             <label for="inputLoginPassword">Password</label>
             <div id="emailHelp" class="form-text">
@@ -71,15 +73,12 @@
           </div>
           <div class="d-flex justify-content-between mt-5">
             <button type="button" class="btn btn-link">Register account</button>
-            <button type="button" class="btn btn-primary" id="buttonLogin">
-              Login
-            </button>
+            <input type="submit" class="btn btn-primary" id="buttonLogin" value="Login">
           </div>
         </form>
       </div>
     </div>
 
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="login.js"></script>
   </body>
 </html>
