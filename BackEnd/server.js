@@ -7,6 +7,9 @@ import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import mysql from "mysql";
+import md5 from "js-md5";
+
+let userid = 0;
 
 const app = express();
 const dbConnection = mysql.createConnection({
@@ -38,30 +41,113 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static("../FrontEnd"));
+
+
+
 
 app.get("/", (req, res) => {
   res.status(200).sendFile(path.join(__dirname, "../FrontEnd/login.html"));
 });
 
-app.get("/todo", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "../FrontEnd/todo.html"));
-  const query = "SELECT * FROM task WHERE userID = 1";
+
+
+app.get("/register", (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, "../FrontEnd/register.html"));
+});
+
+
+
+app.post("/login", (req, res) => {
+  const query = "SELECT * FROM user WHERE mail='" + req.body.mail + "' AND password='" + md5(req.body.password) + "'";
   dbConnection.query(query, (err, result) => {
     if (err) {
       console.log(err);
     } else {
       console.log(result);
+      if (result.length > 0) {
+        userid = result[0].id;
+        res.status(200).sendFile(path.join(__dirname, "../FrontEnd/task.html"));
+      } else {
+        res.status(401).sendFile(path.join(__dirname, "../FrontEnd/unauthorized.html"));
+      }
     }
   });
 });
 
-app.post("/login", (req, res) => {
-  console.log(req.body);
-  const query = "SELECT * FROM user WHERE mail=" + req.body.mail;
-  console.log(query);
-  res.status(200).send("OK");
+
+
+
+app.get("/tasks", (req, res) => {
+  const query = "SELECT * FROM task WHERE userID = " + userid + " ORDER BY id DESC";
+  dbConnection.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.status(200).send(result);
+    }
+  });
 });
+
+
+
+app.post("/add", (req, res) => {
+  const query = "INSERT INTO task (task, userid, done) VALUES ('" + req.body.task + "', " + userid + ", 0)";
+  console.log("query: ", query);
+  dbConnection.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.status(200).send(result);
+    }
+  });
+});
+
+
+
+app.delete("/delete/:id", (req, res) => {
+  const query = "DELETE FROM task WHERE id = " + req.params.id;
+  dbConnection.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      if (result[0])
+        res.status(200).send(result);
+    }
+  });
+});
+
+
+
+app.put("/itemClicked/:id", (req, res) => {
+  let newState = 0;
+  const checkStateQuery = "SELECT done FROM task WHERE id = " + req.params.id;
+  dbConnection.query(checkStateQuery, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Server error");
+    } else {
+      newState = result[0].done == 1 ? 0 : 1;
+
+      const query = "UPDATE task SET done = " + newState + " WHERE id = " + req.params.id;
+      dbConnection.query(query, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send("Server error");
+        } else {
+          console.log(result);
+          res.status(200).send("Task state updated");
+        }
+      });
+    }
+  });
+});
+
+
 
 process.on("beforeExit", () => {
   dbConnection.end();
