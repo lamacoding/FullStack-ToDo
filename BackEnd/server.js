@@ -48,6 +48,7 @@ app.use(express.static("../FrontEnd"));
 
 
 app.get("/", (req, res) => {
+  userid = 0;
   res.status(200).sendFile(path.join(__dirname, "../FrontEnd/login.html"));
 });
 
