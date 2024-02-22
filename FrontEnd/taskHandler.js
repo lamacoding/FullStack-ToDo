@@ -21,7 +21,7 @@ function init() {
       taskElement.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
       taskElement.innerHTML = `
           ${task.done ? `<s>${task.task}</s>` : task.task}
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-3 ms-5">
             <span class="material-symbols-rounded clickable text-secondary" title="Edit task">edit</span>
             <span class="material-symbols-rounded clickable text-danger delete-task" title="Delete task">delete</span>
           </div>
