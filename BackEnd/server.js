@@ -40,10 +40,9 @@ const PORT = 3000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded());
 app.use(bodyParser.json());
 app.use(express.static("../FrontEnd"));
-
 
 
 
@@ -78,10 +77,8 @@ app.post("/login", (req, res) => {
 });
 
 
-
-
 app.get("/tasks", (req, res) => {
-  const query = "SELECT * FROM task WHERE userID = " + userid + " ORDER BY id DESC";
+  const query = "SELECT * FROM task WHERE userid = " + userid + " ORDER BY id DESC";
   dbConnection.query(query, (err, result) => {
     if (err) {
       console.log(err);
