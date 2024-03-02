@@ -60,6 +60,10 @@ app.get("/register", (req, res) => {
 
 
 app.post("/login", (req, res) => {
+  if(typeof req.body.mail !== "string" || typeof req.body.password !== "string")
+  {
+    res.status(400).send("Error 400 - Bad request");
+  }
   const query = "SELECT * FROM user WHERE mail='" + req.body.mail + "' AND password='" + md5(req.body.password) + "'";
   dbConnection.query(query, (err, result) => {
     if (err) {
@@ -141,6 +145,18 @@ app.put("/itemClicked/:id", (req, res) => {
           res.status(200).send("Task state updated");
         }
       });
+    }
+  });
+});
+
+app.put("/update/:id", (req, res) => {
+  const query = "UPDATE task SET task = '" + req.body.task + "' WHERE id = " + req.params.id;
+  dbConnection.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.status(200).send(result);
     }
   });
 });

@@ -32,7 +32,7 @@ h2 {
 
 .login-container {
   padding: 30px 50px 80px 50px;
-  border: 1px solid gainsboro;
+  border: 1px solid rgb(52, 67, 73);
   border-radius: 10px;
   width: 450px;
 }
@@ -51,4 +51,13 @@ h2 {
 
 .form-control-lg {
   font-size: 1rem;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.text-success {
+  text-decoration: line-through;
 }
