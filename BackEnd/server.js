@@ -1,5 +1,4 @@
-import bodyParser from "body-parser";
-import express, { response } from "express";
+import express from "express";
 import path from "path";
 // import https from "https";
 // import fs from "fs";
@@ -41,7 +40,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static("../FrontEnd"));
 
 
@@ -51,13 +50,25 @@ app.get("/", (req, res) => {
   res.status(200).sendFile(path.join(__dirname, "../FrontEnd/login.html"));
 });
 
-
-
 app.get("/register", (req, res) => {
   res.status(200).sendFile(path.join(__dirname, "../FrontEnd/register.html"));
 });
 
-
+app.post("/register", (req, res) => {
+  if(typeof req.body.mail !== "string" || typeof req.body.password !== "string")
+  {
+    res.status(400).send("Error 400 - Bad request");
+  }
+  const query = "INSERT INTO user (mail, password) VALUES ('" + req.body.mail + "', '" + md5(req.body.password) + "')";
+  dbConnection.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.status(200).sendFile(path.join(__dirname, "../FrontEnd/login.html"));
+    }
+  });
+});
 
 app.post("/login", (req, res) => {
   if(typeof req.body.mail !== "string" || typeof req.body.password !== "string")

@@ -58,6 +58,6 @@ h2 {
   visibility: hidden;
 }
 
-.text-success {
+span.text-success {
   text-decoration: line-through;
 }
